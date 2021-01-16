@@ -3,7 +3,7 @@ package com.frozenbits.lightswitchapp.Models
 import com.google.gson.annotations.SerializedName
 
 
-class NestResponse {
+class LightSwitchResponse {
     @SerializedName("code")
     var code: Int = -99
 

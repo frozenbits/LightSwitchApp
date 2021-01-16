@@ -23,7 +23,7 @@
         <service
             android:name="com.frozenbits.lightswitchapp.Services.YeelightOnService"
             android:label="Turn On Yeelight"
-            android:icon="@drawable/ic_placeholder"
+            android:icon="@drawable/ic_led_lamp"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
@@ -33,7 +33,27 @@
         <service
             android:name="com.frozenbits.lightswitchapp.Services.YeelightOffService"
             android:label="Turn Off Yeelight"
-            android:icon="@drawable/ic_placeholder"
+            android:icon="@drawable/ic_led_lamp"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name="com.frozenbits.lightswitchapp.Services.LedStripOnService"
+            android:label="Turn On LED Strip"
+            android:icon="@drawable/ic_led_strip"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name="com.frozenbits.lightswitchapp.Services.LedStripOffService"
+            android:label="Turn Off LED Strip"
+            android:icon="@drawable/ic_led_strip"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />

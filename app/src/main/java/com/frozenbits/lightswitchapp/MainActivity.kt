@@ -3,22 +3,17 @@ package com.frozenbits.lightswitchapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import com.frozenbits.lightswitchapp.Interfaces.NestService
-import com.frozenbits.lightswitchapp.Models.NestResponse
 import com.frozenbits.lightswitchapp.databinding.ActivityMainBinding
+import com.frozenbits.lightswitchapp.Helper.Token
+import com.frozenbits.lightswitchapp.Helper.LightSwitchHelper.Companion.service
+import com.frozenbits.lightswitchapp.Models.LightSwitchResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import com.frozenbits.lightswitchapp.Helper.Token
-
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var retrofit: Retrofit
-    private lateinit var service: NestService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,12 +23,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding.btnLedStripToggle.setOnClickListener(this)
         binding.btnAuthtest.setOnClickListener(this)
         binding.btnGetPowerStatus.setOnClickListener(this)
-
-        retrofit = Retrofit.Builder()
-                .baseUrl(Token.BaseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-        service = retrofit.create(NestService::class.java)
 
         setContentView(view)
     }
@@ -59,9 +48,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    fun enqueueBuilder(call: Call<NestResponse>) {
-        call.enqueue(object: Callback<NestResponse> {
-            override fun onResponse(call: Call<NestResponse>, response: Response<NestResponse>) {
+    fun enqueueBuilder(call: Call<LightSwitchResponse>) {
+        call.enqueue(object: Callback<LightSwitchResponse> {
+            override fun onResponse(call: Call<LightSwitchResponse>, response: Response<LightSwitchResponse>) {
                 if (response.code() == 200) {
                     val nestResponse = response.body()
                     binding.tvCode.text = nestResponse?.code.toString()
@@ -70,7 +59,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     binding.tvStatus.text = nestResponse?.status
                 }
             }
-            override fun onFailure(call: Call<NestResponse>, t: Throwable) {
+            override fun onFailure(call: Call<LightSwitchResponse>, t: Throwable) {
                 binding.tvStatus.text = t.message
             }
         })
