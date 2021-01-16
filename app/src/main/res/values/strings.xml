@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LightSwitch</string>
+    <string name="authorize_in_progress">Authorizing…</string>
 </resources>
